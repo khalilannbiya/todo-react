@@ -74,6 +74,12 @@ function App() {
       setForm(detailTodo);
    };
 
+   const nullDataMessage = () => {
+      if (!todoList.length) {
+         return <p>Data Tidak Ada</p>;
+      }
+   };
+
    return (
       <div>
          <div className="jumbotron">
@@ -86,22 +92,53 @@ function App() {
             </form>
          </div>
          <div className="content">
-            {todoList.map((e, i) => (
-               <div key={i} className="card">
-                  <div className="action">
-                     <input type="checkbox" checked={e.status ? true : false} onChange={() => handleCheck(i)} />
-                  </div>
-                  <div className="text">{e.todo}</div>
-                  <div className="button-action">
-                     <button onClick={() => handleEdit(i)} className="btn-edit">
-                        Edit
-                     </button>
-                     <button onClick={() => handleDelete(i)} className="btn-delete">
-                        Delete
-                     </button>
-                  </div>
-               </div>
-            ))}
+            <h3>Todo</h3>
+            {nullDataMessage()}
+            {todoList.map((e, i) => {
+               if (e.status === false) {
+                  return (
+                     <div key={i} className="card">
+                        <div className="action">
+                           <input type="checkbox" checked={e.status ? true : false} onChange={() => handleCheck(i)} />
+                        </div>
+                        <div className="text">{e.todo}</div>
+                        <div className="button-action">
+                           <button onClick={() => handleEdit(i)} className="btn-edit">
+                              Edit
+                           </button>
+                           <button onClick={() => handleDelete(i)} className="btn-delete">
+                              Delete
+                           </button>
+                        </div>
+                     </div>
+                  );
+               } else {
+                  return <p key={i}>Tidak ada Data</p>;
+               }
+            })}
+         </div>
+         <div className="content">
+            <h3>Completed</h3>
+            {nullDataMessage()}
+            {todoList.map((e, i) => {
+               if (e.status === true) {
+                  return (
+                     <div key={i} className="card">
+                        <div className="action">
+                           <input type="checkbox" checked={e.status ? true : false} onChange={() => handleCheck(i)} />
+                        </div>
+                        <div className="text">{e.todo}</div>
+                        <div className="button-action">
+                           <button onClick={() => handleDelete(i)} className="btn-delete">
+                              Delete
+                           </button>
+                        </div>
+                     </div>
+                  );
+               } else {
+                  return <p key={i}>Tidak ada Data</p>;
+               }
+            })}
          </div>
       </div>
    );
