@@ -7,6 +7,12 @@ function App() {
       todo: "",
    });
 
+   const resetInput = () => {
+      setForm({
+         todo: "",
+      });
+   };
+
    const handleChange = (e) => {
       console.log(e.target.value);
       setForm({
@@ -14,25 +20,32 @@ function App() {
       });
    };
 
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      setTodoList([...todoList, form]);
+      resetInput();
+   };
+
    return (
       <div>
          <div className="jumbotron">
             <h1>Todo List App</h1>
-            <p>{form.todo}</p>
-            <form action="" className="form">
-               <input type="text" name="todo" onChange={handleChange} placeholder="Todo" />
+            <form method="post" onSubmit={handleSubmit} className="form">
+               <input type="text" name="todo" value={form.todo} onChange={handleChange} placeholder="Todo" />
                <button type="submit" className="btn-submit">
                   Submit
                </button>
             </form>
          </div>
          <div className="content">
-            <div className="card">
-               <div className="action">
-                  <input type="checkbox" name="" id="" />
+            {todoList.map((e, i) => (
+               <div key={i} className="card">
+                  <div className="action">
+                     <input type="checkbox" name="" id="" />
+                  </div>
+                  <div className="text">{e.todo}</div>
                </div>
-               <div className="text">Todo here</div>
-            </div>
+            ))}
          </div>
       </div>
    );
