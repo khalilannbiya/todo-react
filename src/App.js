@@ -16,7 +16,6 @@ function App() {
    };
 
    const handleChange = (e) => {
-      console.log(e.target.value);
       setForm({
          ...form,
          todo: e.target.value,
@@ -74,18 +73,12 @@ function App() {
       setForm(detailTodo);
    };
 
-   const nullDataMessage = () => {
-      if (!todoList.length) {
-         return <p>Data Tidak Ada</p>;
-      }
-   };
-
    return (
       <div>
          <div className="jumbotron">
             <h1>Todo List App</h1>
             <form method="post" onSubmit={handleSubmit} className="form">
-               <input type="text" name="todo" value={form.todo} onChange={handleChange} placeholder="Todo" />
+               <input type="text" name="todo" value={form.todo} onChange={handleChange} placeholder="Todo" required />
                <button type="submit" className="btn-submit">
                   Submit
                </button>
@@ -93,9 +86,8 @@ function App() {
          </div>
          <div className="content">
             <h3>Todo</h3>
-            {nullDataMessage()}
             {todoList.map((e, i) => {
-               if (e.status === false) {
+               if (!e.status) {
                   return (
                      <div key={i} className="card">
                         <div className="action">
@@ -112,16 +104,13 @@ function App() {
                         </div>
                      </div>
                   );
-               } else {
-                  return <p key={i}>Tidak ada Data</p>;
                }
             })}
          </div>
          <div className="content">
             <h3>Completed</h3>
-            {nullDataMessage()}
             {todoList.map((e, i) => {
-               if (e.status === true) {
+               if (e.status) {
                   return (
                      <div key={i} className="card">
                         <div className="action">
@@ -135,8 +124,6 @@ function App() {
                         </div>
                      </div>
                   );
-               } else {
-                  return <p key={i}>Tidak ada Data</p>;
                }
             })}
          </div>

@@ -81,3 +81,7 @@ body {
 .btn-delete {
   background-color: #bf2828;
 }
+
+.warning {
+  color: #bf2828;
+}
