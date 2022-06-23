@@ -60,3 +60,24 @@ body {
   border-radius: 5px;
   margin-top: 15px;
 }
+
+.text {
+  flex: 3;
+}
+
+.button-action {
+  flex: 1
+}
+
+.btn-edit, .btn-delete {
+  border: none;
+  background-color: #ff9900;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  margin: 2px;
+}
+
+.btn-delete {
+  background-color: #bf2828;
+}
